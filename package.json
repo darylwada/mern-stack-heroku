@@ -5,16 +5,16 @@
   "engines": {
     "node": "10.6.0"
   },
-  "main": "server/index.js",
+  "main": "mern-stack/server/index.js",
   "scripts": {
-    "start": "node .",
-    "build": "browserify -g uglifyify -t babelify client/ -o server/public/main.js",
+    "start": "node mern-stack/server/index.js",
+    "build": "browserify -g uglifyify -t babelify mern-stack/client/ -o mern-stack/server/public/main.js",
     "watch:server": "nodemon .",
-    "watch:client": "watchify -vd -t babelify client/ -o server/public/main.js",
+    "watch:client": "watchify -vd -t babelify mern-stack/client/ -o mern-stack/server/public/main.js",
     "watch:public": "browser-sync start -c browser-sync.js",
     "watch": "npm-run-all --parallel watch:*",
-    "postinstall": "bower install && grunt build",
-    "heroku-postbuild": "echo This runs afterwards."
+    "postinstall": "browserify -g uglifyify -t babelify mern-stack/client/ -o mern-stack/server/public/main.js",
+    "heroku-postbuild": "node mern-stack/database/setup.js"
   },
   "babel": {
     "plugins": [
@@ -25,10 +25,10 @@
   },
   "nodemonConfig": {
     "watch": [
-      "server/"
+      "mern-stack/server/"
     ],
     "ignore": [
-      "server/public/"
+      "mern-stack/server/public/"
     ]
   },
   "keywords": [],
